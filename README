@@ -1,0 +1,5 @@
+cdi will be an interactive command line tool to browse files and change directories. It is inspired by the Mac's file browser Finder, and should have a 'hotlist' of common directories on the left, and a column view of files.
+
+In addition, it will be very fast to navigate with the keyboard.
+
+I will implement it in C using ncurses, as a learning project.
