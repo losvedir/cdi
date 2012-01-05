@@ -1,6 +1,8 @@
 #include <ncurses.h>
+#include "model/dir.h"
+#include "model/dirent.h"
 
-int main() {
+int main(int argc, char **argv) {
     int ch;
 
     initscr();              /* initialize curses mode */
@@ -9,9 +11,9 @@ int main() {
     keypad(stdscr, TRUE);   /* for handling arrow keys, fn, etc */
     
     printw("Hello World !!!\n");
-    while (ch = getch()) {
+    while ((ch = getch())) {
         refresh();
-    }
+    } 
     endwin();
     return 0;
 }

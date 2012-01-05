@@ -1,0 +1,31 @@
+Directory list --
+What state to store?
+Min: directory name, and on each keypress get list of files and filter.
+Max: currently filtered list of files, each keypress filter further
+In between: store list of files in directory. on each keypress re-filter
+
+Who stores filter letters so far? Controller, model, or view?
+e.g.: "Des" has been typed. Where is that stored?
+
+- letters typed so far likely to be useful elsewhere in the program
+- searching will be by substring. type "k" now and filter by "Desk", so likely easier to refilter
+- filtering only occurs in 'current directory', not universal to directories.
+- currently highlighted item should remain highlighted unless filtered away. easy/hard in any of above scenarios?
+
+What about backspace/delete?
+- will need to get back filtered away items.
+- maybe controller should manage that so it can send new substring to directory list's filter function
+
+Decision One: There will be a directory list struct which just lists all the actual files in that directory.
+This is needed anyway for child and parent.
+It also needs to include currently highlighted item.
+
+Probably best is: there will be "directory items" and "linked list of directory items", and the different views can each
+maintain their own list(s).
+
+In <sys/stat.h> "So deprecated it would make your head spin"
+
+
+File_T - storing the name and the short name. Should I allocate a 256 char array (well, two, one for long name, one for short) in the struct, or just a pointer to a char, and then allocate memory as needed? cdi will have three windows: parent, current, and child dirs. Each may have, say, 1000 files in the extreme case (just did ls /usr/bin | wc and found I had 1,092 in there). That's 3,000 files * 2 * char arrays of * 256 bytes each = 1.5 MB. Still rather small in modern terms. Checking Activity Monitor that puts me below zsh, so I guess that's okay for now.
+
+Dir_T - when freeing, do I free all the Dirents, also?
